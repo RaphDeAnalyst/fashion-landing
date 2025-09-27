@@ -82,12 +82,7 @@ function App() {
   }
 
   if (currentPage === 'collection') {
-    return (
-      <>
-        <FloatingNavbar currentPage="collection" onNavigate={handleNavigate} />
-        <Collection onBackToHome={handleBackToHome} />
-      </>
-    )
+    return <Collection onBackToHome={handleNavigate} />
   }
 
   return (

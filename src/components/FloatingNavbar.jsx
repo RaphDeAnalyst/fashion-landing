@@ -26,20 +26,55 @@ const FloatingNavbar = ({ currentPage, onNavigate }) => {
   };
 
   const dropdownItems = [
-    { id: 'home', label: 'Home', icon: '🏠' },
-    { id: 'about', label: 'About Us', icon: '✨' },
-    { id: 'gallery', label: 'Gallery', icon: '🎨' },
-    { id: 'contact', label: 'Contact', icon: '📧' }
+    {
+      id: 'home',
+      label: 'Home',
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      )
+    },
+    {
+      id: 'about',
+      label: 'About Us',
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      )
+    },
+    {
+      id: 'gallery',
+      label: 'Gallery',
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      )
+    },
+    {
+      id: 'contact',
+      label: 'Contact',
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    }
   ];
 
   return (
-    <>
+    <div className={currentPage === 'collection' ? "relative" : ""}>
       {/* Main Brand Badge */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="fixed top-6 left-6 z-40"
+        className={currentPage === 'collection'
+          ? "flex-shrink-0"
+          : "fixed top-4 left-4 sm:top-6 sm:left-6 z-40"
+        }
       >
         <motion.button
           onClick={handleBrandClick}
@@ -47,9 +82,9 @@ const FloatingNavbar = ({ currentPage, onNavigate }) => {
           whileTap={{ scale: 0.95 }}
           className="group relative"
         >
-          <div className="backdrop-blur-md bg-white/90 border border-gray-200/50 rounded-full px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="backdrop-blur-md bg-white/90 border border-gray-200/50 rounded-full px-4 py-2 sm:px-6 sm:py-3 shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="flex items-center space-x-3">
-              <span className="font-serif text-lg font-bold text-gray-900">
+              <span className="font-serif text-base sm:text-lg font-bold text-gray-900">
                 Peesaenth
               </span>
 
@@ -98,9 +133,9 @@ const FloatingNavbar = ({ currentPage, onNavigate }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-20 left-6 z-30"
+            className="absolute top-full right-0 mt-2 z-30"
           >
-            <div className="backdrop-blur-md bg-white/95 border border-gray-200/50 rounded-2xl shadow-xl overflow-hidden min-w-[200px]">
+            <div className="backdrop-blur-md bg-white/95 border border-gray-200/50 rounded-2xl shadow-xl overflow-hidden min-w-[180px] sm:min-w-[200px]">
               {dropdownItems.map((item, index) => (
                 <motion.button
                   key={item.id}
@@ -110,7 +145,7 @@ const FloatingNavbar = ({ currentPage, onNavigate }) => {
                   onClick={() => handleNavigate(item.id)}
                   className="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-gray-50/80 transition-colors duration-200 group"
                 >
-                  <span className="text-lg group-hover:scale-110 transition-transform duration-200">
+                  <span className="group-hover:scale-110 transition-transform duration-200">
                     {item.icon}
                   </span>
                   <span className="font-medium text-gray-700 group-hover:text-gray-900">
@@ -135,7 +170,7 @@ const FloatingNavbar = ({ currentPage, onNavigate }) => {
           />
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 

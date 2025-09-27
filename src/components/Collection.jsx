@@ -4,6 +4,7 @@ import { getAllProducts, categories } from '../data/products';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
 import Footer from './Footer';
+import FloatingNavbar from './FloatingNavbar';
 
 const Collection = ({ onBackToHome }) => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -80,7 +81,7 @@ const Collection = ({ onBackToHome }) => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pt-16 sm:pt-6">
           <div className="flex items-center justify-between">
             <motion.h1
               initial={{ opacity: 0, x: -20 }}
@@ -90,15 +91,8 @@ const Collection = ({ onBackToHome }) => {
             >
               Complete Collection
             </motion.h1>
-            <motion.button
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              onClick={onBackToHome}
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-300"
-            >
-              ← Back to Home
-            </motion.button>
+            {/* Floating navbar positioned in header */}
+            <FloatingNavbar currentPage="collection" onNavigate={onBackToHome} />
           </div>
         </div>
       </div>

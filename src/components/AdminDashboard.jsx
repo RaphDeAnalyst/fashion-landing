@@ -123,10 +123,42 @@ const AdminDashboard = ({ onClose }) => {
   };
 
   const tabs = [
-    { id: 'products', label: 'Manage Products', icon: '📦' },
-    { id: 'add', label: 'Add Product', icon: '➕' },
-    { id: 'gallery', label: 'Gallery Images', icon: '🖼️' },
-    { id: 'analytics', label: 'Analytics', icon: '📊' }
+    {
+      id: 'products',
+      label: 'Manage Products',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+      )
+    },
+    {
+      id: 'add',
+      label: 'Add Product',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        </svg>
+      )
+    },
+    {
+      id: 'gallery',
+      label: 'Gallery Images',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      )
+    },
+    {
+      id: 'analytics',
+      label: 'Analytics',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      )
+    }
   ];
 
   return (
@@ -152,13 +184,13 @@ const AdminDashboard = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="flex-1 flex overflow-hidden">
+        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
           {/* Sidebar */}
-          <div className="w-64 bg-white shadow-sm border-r border-gray-200">
+          <div className="w-full lg:w-64 bg-white shadow-sm border-b lg:border-b-0 lg:border-r border-gray-200">
             {/* Quick Stats */}
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-4 lg:p-6 border-b border-gray-200">
               <h3 className="text-sm font-medium text-gray-500 mb-4">Quick Stats</h3>
-              <div className="space-y-3">
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 lg:space-y-3 lg:gap-0">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Total Products</span>
                   <span className="text-sm font-semibold text-gray-900">{stats.totalProducts}</span>
@@ -197,18 +229,18 @@ const AdminDashboard = ({ onClose }) => {
 
             {/* Navigation */}
             <nav className="p-4">
-              <div className="space-y-2">
+              <div className="flex lg:flex-col space-x-2 lg:space-x-0 lg:space-y-2 overflow-x-auto lg:overflow-x-visible">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+                    className={`w-full lg:w-auto flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
                       activeTab === tab.id
                         ? 'bg-gray-900 text-white'
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    <span className="mr-3 text-lg">{tab.icon}</span>
+                    <span className="mr-3">{tab.icon}</span>
                     {tab.label}
                   </button>
                 ))}
@@ -218,7 +250,7 @@ const AdminDashboard = ({ onClose }) => {
 
           {/* Main Content */}
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-7xl mx-auto p-6">
+            <div className="max-w-7xl mx-auto p-4 lg:p-6">
               {activeTab === 'products' && (
                 <ProductListManager
                   products={products}
@@ -277,7 +309,9 @@ const AdminDashboard = ({ onClose }) => {
                     <div className="bg-white p-6 rounded-lg shadow">
                       <div className="flex items-center">
                         <div className="p-3 rounded-full bg-blue-100">
-                          <span className="text-2xl">📦</span>
+                          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                          </svg>
                         </div>
                         <div className="ml-4">
                           <p className="text-sm font-medium text-gray-500">Total Products</p>
@@ -289,7 +323,9 @@ const AdminDashboard = ({ onClose }) => {
                     <div className="bg-white p-6 rounded-lg shadow">
                       <div className="flex items-center">
                         <div className="p-3 rounded-full bg-green-100">
-                          <span className="text-2xl">✅</span>
+                          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
                         <div className="ml-4">
                           <p className="text-sm font-medium text-gray-500">In Stock</p>
@@ -301,7 +337,9 @@ const AdminDashboard = ({ onClose }) => {
                     <div className="bg-white p-6 rounded-lg shadow">
                       <div className="flex items-center">
                         <div className="p-3 rounded-full bg-red-100">
-                          <span className="text-2xl">❌</span>
+                          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
                         </div>
                         <div className="ml-4">
                           <p className="text-sm font-medium text-gray-500">Out of Stock</p>
